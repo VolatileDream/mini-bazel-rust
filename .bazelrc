@@ -1,0 +1,10 @@
+# This renames crates so that they can be imported using "import::import!",
+# however it has a carve out for third-party crates, which it expects to live
+# in //third_party/rust by default (configurable with third_party_dir):
+# https://github.com/bazelbuild/rules_rust/blob/main/rust/settings/BUILD.bazel#L16-L23
+
+build --@rules_rust//rust/settings:rename_first_party_crates=true
+
+# This enables usage of the "import::import!" macro which conveniently imports things.
+# But this requires that we add extra dependencies as listed in WORKSPACE.
+build --@rules_rust//rust/settings:use_real_import_macro=true
